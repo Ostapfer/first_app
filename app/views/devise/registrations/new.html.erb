@@ -11,8 +11,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :role %><br />
-    <%= f.text_field :role %>
+    <%= f.radio_button :role, 'Reader', :checked => true %>Reader<br />
+    <%= f.radio_button :role, 'Writer' %>Writer<br />
   </div>
 
   <div class="field">
