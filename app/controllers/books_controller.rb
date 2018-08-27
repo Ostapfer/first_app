@@ -24,7 +24,7 @@ class BooksController < ApplicationController
         @check = List.where(
                 user_id: current_user.id, 
                 book_id: @book.id
-            ).count
+            ).count if user_signed_in?
     end
 
     def new

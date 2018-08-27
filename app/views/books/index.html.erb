@@ -1,3 +1,5 @@
+<% provide(:title, 'Books') %>
+
 <h2>All books new)</h2>
 
 
@@ -23,6 +25,9 @@
     <p class="time"><%= book.name %></p>
     <p class="time"><%= book.description %></p>
     <%= link_to "Show book", book_path(book), :class => 'btn btn-info' %>
+    <% if user_signed_in? && check_book_in_list(book.id) %>
+        <h5 class='text-warning'>Книга вже у вашому списку</h5>
+    <% end %>
     </div>
 <% end %>
 
