@@ -1,0 +1,11 @@
+<h4>Edit Book<h4>
+
+
+
+<%= form_for :book, url: book_path(@book), method: :patch  do |f| %>
+    <%= f.text_field :name, :placeholder => "Name", :class => 'form-control' %>
+    <br>
+    <%= f.text_area :description, :placeholder => "Description", :class => 'form-control' %>
+    <br>
+    <%= f.submit "Edit", :class => 'btn btn-warning' %>
+<% end %>

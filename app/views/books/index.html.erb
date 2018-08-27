@@ -1,0 +1,28 @@
+<h2>All books</h2>
+
+
+<%= form_tag(books_path, method: :get) do %>
+    <%= text_field_tag :name, params[:name] %>
+    <%= submit_tag 'Search name' %>
+<% end %>
+
+<%= form_tag(books_path, method: :get) do %>
+    <%= text_field_tag :author, params[:author] %>
+    <%= submit_tag 'Search author surname' %>
+<% end %>
+
+<br/><br/>
+
+<% if user_signed_in? && current_user.role == "Writer" %>
+    <%= link_to "New book", new_book_path, :class => 'btn btn-default' %>
+<% end %>
+<br>
+
+<% @books.each do |book| %> 
+    <div class="book"> 
+    <p class="time"><%= book.name %></p>
+    <p class="time"><%= book.description %></p>
+    <%= link_to "Show book", book_path(book), :class => 'btn btn-info' %>
+    </div>
+<% end %>
+

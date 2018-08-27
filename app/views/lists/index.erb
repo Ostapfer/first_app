@@ -1,0 +1,27 @@
+<h2>My_list</h2>
+  
+
+<% @lists.each do |list| %>
+    <% if list.book != nil %>
+    <div class='book'>    
+        <p><%= list.book.name %></p>
+        <%= link_to "Show book", book_path(list.book), :class => "btn btn-info" %>
+        
+        <% if list.read != 1 %>
+            <%= form_for :list, url: list_path(list), method: :patch  do |f| %>
+                <%= f.hidden_field :read, :value => "1" %>
+                <%= f.submit "Read", :class => 'btn btn-success' %>
+            <% end %>
+        <% else %>
+            <%= form_for :list, url: list_path(list), method: :patch  do |f| %>
+                <%= f.hidden_field :read, :value => "0" %>
+                <%= f.submit "Un Read", :class => 'btn btn-warning' %>
+            <% end %>
+        <% end %>
+        <%= link_to "Delete", list_path(list),
+                            method: :delete,
+                            data: {confirm: 'Are you sure?'},
+                            :class => 'btn btn-danger' %>
+    </div>
+    <% end %>
+<% end %>

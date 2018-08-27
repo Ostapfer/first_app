@@ -1,0 +1,33 @@
+<%= link_to "Back", '/' %>
+
+
+<h2><%= @book.name %></h2>
+<p><%= @book.description %></p>
+<p>Name of autor - <%= @book.user.surname %> <%= @book.user.name %></p>
+
+
+<% if user_signed_in? && current_user.role == "Reader" %>
+    <%= form_for :list, url: lists_path do |f| %>
+        <% if @check == 0 %>
+            <%= f.hidden_field :book_id, :value => @book.id %>
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+            <%= f.submit "Add in List" %>
+        <% else %>
+            <h4>Книга вже у вашому списку</h4>
+        <% end %>
+    <% end %>
+
+    <!--<%= link_to "Add in list", lists_path,
+                                method: :post,
+                                data: { book_id: @book.id },
+                                :class => 'btn btn-success' %>-->
+<% end %>
+
+<% if @book.user == current_user %>
+    <%= link_to "Delete", book_path(@book),
+                            method: :delete,
+                            data: {confirm: 'Are you sure?'},
+                            :class => 'btn btn-danger' %>
+                            
+    <%= link_to "Edit", edit_book_path(@book), :class => 'btn btn-warning' %>
+<% end %>
